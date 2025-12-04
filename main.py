@@ -1,17 +1,19 @@
 from fastapi import FastAPI, HTTPException, Header, UploadFile, File
 from pydantic import BaseModel
 from typing import Optional
+import os
 import re
 from pathlib import Path
 from food_mapper import get_ingredient_info
 from PIL import Image
 import torch
 from transformers import AutoProcessor, AutoModelForImageClassification
+from ml_food_analyzer import analyze_food_image
 
 app = FastAPI(title="VanityOS Skincare API", version="1.0.0")
 
-# API key for authentication
-API_KEY = "vanityos_scanner_M1c43ll3kuzemczak0417"
+# API key for authentication - read from environment or use default
+API_KEY = os.getenv("VANITYOS_API_KEY", "vanityos_scanner_M1c43ll3kuzemczak0417")
 
 # Load food detection model lazily (on first use)
 processor_foodcheck = None
@@ -36,7 +38,8 @@ async def root():
     return {
         "message": "VanityOS Skincare API - Healthy Ingredients Hub",
         "endpoints": {
-            "/analyze_food": "Analyze if a food ingredient is comedogenic for skin",
+            "GET /analyze_food": "Analyze if a food ingredient is comedogenic for skin (text-based)",
+            "POST /analyze_food": "Analyze a food photo using ML and return acne-health metadata",
             "/analyze_image": "Analyze an uploaded image to detect food",
             "/docs": "Interactive API documentation"
         }
@@ -44,27 +47,27 @@ async def root():
 
 
 @app.get("/analyze_food", response_model=FoodAnalysis)
-async def analyze_food(
+async def analyze_food_get(
     food: str,
     x_api_key: Optional[str] = Header(None, alias="x-api-key")
 ):
     """
-    Analyze a food ingredient for comedogenic properties.
-    
+    Analyze a food ingredient for comedogenic properties (text-based lookup).
+
     Args:
         food: The name of the food/ingredient to analyze (e.g., "Pumpkin Seeds", "Avocado Oil")
         x_api_key: API key for authentication (in header as 'x-api-key')
-    
+
     Returns:
         FoodAnalysis object with comedogenic information
     """
     # Verify API key
     if x_api_key != API_KEY:
         raise HTTPException(status_code=401, detail="Invalid API key")
-    
+
     # Get ingredient information
     info = get_ingredient_info(food)
-    
+
     if info:
         return FoodAnalysis(
             food=food,
@@ -79,6 +82,89 @@ async def analyze_food(
             is_comedogenic=None,
             comedogenic_grade=None,
             comedogenic_notes="Ingredient not found in database"
+        )
+
+
+@app.post("/analyze_food")
+async def analyze_food_post(
+    image: UploadFile = File(...),
+    x_api_key: Optional[str] = Header(None, alias="x-api-key")
+):
+    """
+    Analyze a food photo using ML classification and return acne-health metadata.
+
+    This endpoint uses a trained TensorFlow/Keras model to identify foods in uploaded images
+    and matches them against a comprehensive acne-health database.
+
+    Args:
+        image: Image file (multipart/form-data) containing a food photo
+        x_api_key: API key for authentication (in header as 'x-api-key')
+
+    Returns:
+        JSON object with food name, rating, category, reasons, and alternatives
+
+    Raises:
+        401: Invalid API key
+        400: Invalid image file
+        404: Food detected but not found in database
+        500: Model loading or processing error
+    """
+    # Authentication: verify API key
+    if x_api_key != API_KEY:
+        raise HTTPException(status_code=401, detail={"error": "Invalid API key"})
+
+    # Validate image file
+    if not image.content_type or not image.content_type.startswith('image/'):
+        raise HTTPException(
+            status_code=400,
+            detail={"error": "Invalid file type. Please upload an image file."}
+        )
+
+    try:
+        # Read image bytes
+        image_bytes = await image.read()
+
+        # Create a BytesIO object for PIL
+        from io import BytesIO
+        image_io = BytesIO(image_bytes)
+
+        # Run ML analysis pipeline
+        matched_entry, detected_labels = analyze_food_image(image_io, top_k=3)
+
+        if matched_entry:
+            # Success: return the matched food data
+            return matched_entry
+        else:
+            # No match found: return 404 with detected labels
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "Food not found in database",
+                    "detected": ", ".join(detected_labels),
+                    "suggestions": "Try training a custom model with your specific foods"
+                }
+            )
+
+    except HTTPException:
+        # Re-raise HTTP exceptions (authentication, not found, etc.)
+        raise
+    except FileNotFoundError as e:
+        # Model or database files not found
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": "Server configuration error",
+                "message": str(e)
+            }
+        )
+    except Exception as e:
+        # Other errors (image processing, model prediction, etc.)
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": "Failed to analyze image",
+                "message": str(e)
+            }
         )
 
 

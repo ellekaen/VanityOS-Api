@@ -42,6 +42,68 @@ uvicorn main:app --reload
 
 The API will be available at `http://127.0.0.1:8000`
 
+## Running the Scanner Backend
+
+The scanner functionality uses machine learning to analyze food photos and provide acne-health ratings. To enable this feature:
+
+### 1. Install TensorFlow and Dependencies
+
+If you haven't already installed all dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+This will install TensorFlow 2.15.0 along with all other required packages.
+
+### 2. Set Environment Variables
+
+Configure the scanner by setting these environment variables:
+
+```bash
+# Required: Your API key for authentication
+export VANITYOS_API_KEY="your_secure_api_key_here"
+
+# Optional: Path to your trained Keras model (defaults to ml/out/vanityos.keras)
+export VANITYOS_MODEL_PATH="ml/out/vanityos.keras"
+
+# Optional: Path to your model labels file (defaults to ml/out/labels.json)
+export VANITYOS_LABELS_PATH="ml/out/labels.json"
+```
+
+Or create a `.env` file in the project root:
+
+```env
+VANITYOS_API_KEY=your_secure_api_key_here
+VANITYOS_MODEL_PATH=ml/out/vanityos.keras
+VANITYOS_LABELS_PATH=ml/out/labels.json
+```
+
+### 3. Ensure Model Files Exist
+
+Make sure your trained model and labels are in place:
+
+```bash
+# Create the ml/out directory if it doesn't exist
+mkdir -p ml/out
+
+# Place your trained model at ml/out/vanityos.keras
+# Place your labels file at ml/out/labels.json
+```
+
+The labels file should be a JSON array of food names, e.g.:
+```json
+["apple", "banana", "broccoli", "salmon", ...]
+```
+
+### 4. Start the Server
+
+```bash
+uvicorn main:app --reload
+```
+
+The scanner endpoint will be available at `POST /analyze_food` and will accept image uploads for food analysis.
+
 ## API Endpoints
 
 ### Root
@@ -50,7 +112,7 @@ The API will be available at `http://127.0.0.1:8000`
 ### Health Check
 - **GET** `/health` - Health status
 
-### Analyze Food
+### Analyze Food (Text-based)
 - **GET** `/analyze_food?food=<food_name>` - Analyze if a food ingredient is comedogenic
 - **Headers**: `x-api-key: <your_api_key>`
 - **Response**: Food analysis with comedogenic grade and notes
@@ -60,6 +122,32 @@ The API will be available at `http://127.0.0.1:8000`
 curl -G "http://127.0.0.1:8000/analyze_food" \
   --data-urlencode "food=Pumpkin Seeds" \
   -H "x-api-key: vanityos_scanner_M1c43ll3kuzemczak0417"
+```
+
+### Analyze Food (ML Scanner)
+- **POST** `/analyze_food` - Upload a food photo and get acne-health analysis
+- **Headers**: `x-api-key: <your_api_key>`
+- **Body**: Image file (multipart/form-data)
+- **Response**: Food rating, category, reasons, and alternatives
+
+**Example:**
+```bash
+curl -X POST "http://127.0.0.1:8000/analyze_food" \
+  -H "x-api-key: vanityos_scanner_M1c43ll3kuzemczak0417" \
+  -F "image=@path/to/food.jpg"
+```
+
+**Success Response:**
+```json
+{
+  "food": "Pumpkin Seeds",
+  "rating": 95,
+  "category": "Anti-inflammatory",
+  "reasons": ["Rich in zinc which helps regulate oil production", "..."],
+  "alternatives": ["Sunflower seeds", "Chia seeds", "Hemp seeds"],
+  "detected_label": "pumpkin_seeds",
+  "confidence": 0.95
+}
 ```
 
 ### Analyze Image

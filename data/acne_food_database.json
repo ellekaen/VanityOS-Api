@@ -1,0 +1,322 @@
+[
+  {
+    "food": "Pumpkin Seeds",
+    "rating": 95,
+    "category": "Anti-inflammatory",
+    "reasons": [
+      "Rich in zinc which helps regulate oil production",
+      "Contains omega-3 fatty acids that reduce inflammation",
+      "High in vitamin E which promotes skin healing",
+      "Selenium content helps protect against oxidative damage"
+    ],
+    "alternatives": [
+      "Sunflower seeds",
+      "Chia seeds",
+      "Hemp seeds"
+    ]
+  },
+  {
+    "food": "Salmon",
+    "rating": 92,
+    "category": "Anti-inflammatory",
+    "reasons": [
+      "High in omega-3 fatty acids which reduce inflammation",
+      "Contains astaxanthin, a powerful antioxidant",
+      "Rich in vitamin D which supports skin health",
+      "Provides high-quality protein for skin repair"
+    ],
+    "alternatives": [
+      "Sardines",
+      "Mackerel",
+      "Trout"
+    ]
+  },
+  {
+    "food": "Avocado",
+    "rating": 88,
+    "category": "Healthy Fats",
+    "reasons": [
+      "Contains healthy monounsaturated fats",
+      "Rich in vitamin E for skin protection",
+      "Provides biotin which supports skin health",
+      "Anti-inflammatory properties help reduce acne"
+    ],
+    "alternatives": [
+      "Olive oil",
+      "Nuts",
+      "Seeds"
+    ]
+  },
+  {
+    "food": "Sweet Potato",
+    "rating": 90,
+    "category": "Low Glycemic",
+    "reasons": [
+      "Low glycemic index doesn't spike blood sugar",
+      "Rich in beta-carotene (vitamin A) for skin cell turnover",
+      "High in vitamin C for collagen production",
+      "Contains antioxidants that fight skin damage"
+    ],
+    "alternatives": [
+      "Butternut squash",
+      "Carrots",
+      "Pumpkin"
+    ]
+  },
+  {
+    "food": "Spinach",
+    "rating": 93,
+    "category": "Nutrient Dense",
+    "reasons": [
+      "High in vitamin A which regulates oil production",
+      "Contains chlorophyll with anti-inflammatory properties",
+      "Rich in vitamin C for collagen synthesis",
+      "Provides iron which supports skin oxygenation"
+    ],
+    "alternatives": [
+      "Kale",
+      "Swiss chard",
+      "Collard greens"
+    ]
+  },
+  {
+    "food": "Blueberries",
+    "rating": 91,
+    "category": "Antioxidant Rich",
+    "reasons": [
+      "Packed with antioxidants that fight free radicals",
+      "Contains anthocyanins which reduce inflammation",
+      "High in vitamin C for skin repair",
+      "Low glycemic index prevents blood sugar spikes"
+    ],
+    "alternatives": [
+      "Strawberries",
+      "Raspberries",
+      "Blackberries"
+    ]
+  },
+  {
+    "food": "Green Tea",
+    "rating": 89,
+    "category": "Antioxidant Rich",
+    "reasons": [
+      "Contains EGCG which reduces sebum production",
+      "Powerful anti-inflammatory effects",
+      "Antioxidants help reduce acne-causing bacteria",
+      "May help regulate hormones linked to acne"
+    ],
+    "alternatives": [
+      "White tea",
+      "Matcha",
+      "Rooibos tea"
+    ]
+  },
+  {
+    "food": "Walnuts",
+    "rating": 87,
+    "category": "Healthy Fats",
+    "reasons": [
+      "Good source of omega-3 fatty acids",
+      "Contains zinc which helps heal skin",
+      "Provides vitamin E for skin protection",
+      "Anti-inflammatory properties reduce acne"
+    ],
+    "alternatives": [
+      "Almonds",
+      "Pecans",
+      "Brazil nuts"
+    ]
+  },
+  {
+    "food": "Tomato",
+    "rating": 86,
+    "category": "Antioxidant Rich",
+    "reasons": [
+      "High in lycopene which protects skin from sun damage",
+      "Contains vitamin C for collagen production",
+      "Low glycemic index",
+      "Anti-inflammatory properties help reduce acne"
+    ],
+    "alternatives": [
+      "Red bell peppers",
+      "Watermelon",
+      "Pink grapefruit"
+    ]
+  },
+  {
+    "food": "Yogurt",
+    "rating": 84,
+    "category": "Probiotic",
+    "reasons": [
+      "Probiotics support gut health linked to clear skin",
+      "Contains zinc which regulates oil production",
+      "Provides protein for skin repair",
+      "May help reduce inflammation"
+    ],
+    "alternatives": [
+      "Kefir",
+      "Sauerkraut",
+      "Kimchi"
+    ]
+  },
+  {
+    "food": "Broccoli",
+    "rating": 88,
+    "category": "Nutrient Dense",
+    "reasons": [
+      "High in vitamin C for skin healing",
+      "Contains sulforaphane with anti-inflammatory properties",
+      "Rich in vitamin A for cell turnover",
+      "Provides zinc for oil regulation"
+    ],
+    "alternatives": [
+      "Cauliflower",
+      "Brussels sprouts",
+      "Cabbage"
+    ]
+  },
+  {
+    "food": "Oyster",
+    "rating": 94,
+    "category": "Zinc Rich",
+    "reasons": [
+      "Extremely high in zinc, the #1 mineral for acne",
+      "Helps regulate oil production and hormone balance",
+      "Supports wound healing and reduces inflammation",
+      "Contains selenium for antioxidant protection"
+    ],
+    "alternatives": [
+      "Beef",
+      "Pumpkin seeds",
+      "Chickpeas"
+    ]
+  },
+  {
+    "food": "Turmeric",
+    "rating": 92,
+    "category": "Anti-inflammatory",
+    "reasons": [
+      "Contains curcumin, a powerful anti-inflammatory compound",
+      "Helps reduce acne-causing bacteria",
+      "Antioxidant properties protect skin cells",
+      "May help regulate sebum production"
+    ],
+    "alternatives": [
+      "Ginger",
+      "Cinnamon",
+      "Garlic"
+    ]
+  },
+  {
+    "food": "Dark Chocolate",
+    "rating": 75,
+    "category": "Antioxidant Rich",
+    "reasons": [
+      "High in antioxidants (choose 70%+ cacao)",
+      "Contains flavonoids that improve skin texture",
+      "May help protect against sun damage",
+      "Provides minerals like zinc and magnesium"
+    ],
+    "alternatives": [
+      "Cacao nibs",
+      "Cacao powder",
+      "Carob"
+    ]
+  },
+  {
+    "food": "Lentils",
+    "rating": 89,
+    "category": "Low Glycemic",
+    "reasons": [
+      "Low glycemic index prevents insulin spikes",
+      "Rich in zinc for oil regulation",
+      "High in protein for skin repair",
+      "Contains folate which supports cell regeneration"
+    ],
+    "alternatives": [
+      "Chickpeas",
+      "Black beans",
+      "Kidney beans"
+    ]
+  },
+  {
+    "food": "Coconut",
+    "rating": 45,
+    "category": "Moderate Risk",
+    "reasons": [
+      "High in saturated fats which may increase sebum",
+      "Can be comedogenic for some people",
+      "May trigger breakouts in acne-prone individuals",
+      "Better consumed in moderation"
+    ],
+    "alternatives": [
+      "Avocado",
+      "Olive oil",
+      "Almond milk"
+    ]
+  },
+  {
+    "food": "White Bread",
+    "rating": 25,
+    "category": "High Glycemic",
+    "reasons": [
+      "High glycemic index causes insulin spikes",
+      "Refined carbs increase inflammation",
+      "Triggers increased sebum production",
+      "Lack of nutrients compared to whole grains"
+    ],
+    "alternatives": [
+      "Whole grain bread",
+      "Sourdough",
+      "Sprouted grain bread"
+    ]
+  },
+  {
+    "food": "Milk",
+    "rating": 35,
+    "category": "Dairy",
+    "reasons": [
+      "Contains hormones that may trigger breakouts",
+      "Can increase insulin-like growth factor (IGF-1)",
+      "May stimulate oil production",
+      "Whey protein in milk can worsen acne"
+    ],
+    "alternatives": [
+      "Almond milk",
+      "Oat milk",
+      "Coconut milk"
+    ]
+  },
+  {
+    "food": "French Fries",
+    "rating": 20,
+    "category": "Fried/Processed",
+    "reasons": [
+      "High in unhealthy trans fats and oils",
+      "Promotes inflammation throughout the body",
+      "High glycemic index spikes blood sugar",
+      "Lacks nutrients beneficial for skin health"
+    ],
+    "alternatives": [
+      "Baked sweet potato fries",
+      "Air-fried vegetables",
+      "Roasted chickpeas"
+    ]
+  },
+  {
+    "food": "Soda",
+    "rating": 15,
+    "category": "High Sugar",
+    "reasons": [
+      "Extremely high in sugar causing insulin spikes",
+      "Increases inflammation and oxidative stress",
+      "No nutritional value for skin health",
+      "Can worsen hormonal acne"
+    ],
+    "alternatives": [
+      "Sparkling water with lemon",
+      "Green tea",
+      "Herbal tea"
+    ]
+  }
+]
